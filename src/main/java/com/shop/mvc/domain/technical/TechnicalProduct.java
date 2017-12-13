@@ -2,20 +2,37 @@ package com.shop.mvc.domain.technical;
 
 import com.shop.mvc.domain.Product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name = "technical")
+@MappedSuperclass
 public class TechnicalProduct extends Product {
 
+    @Column
     private String operationSystem;
+    @Column
     private String processor;
+    @Column
     private Double screedSize;
+    @Column
     private Integer ram;
+    @Column
     private Integer hdd;
+    @Column
     private String color;
+    @Column
     private Double weight;
+    @Column
+    private Integer battery;
 
     public TechnicalProduct() {}
 
     public TechnicalProduct(String producedBy, String title, Integer price, String description,
-                            String operationSystem, String processor, Double screedSize, Integer ram, Integer hdd, String color, Double weight) {
+    String operationSystem, String processor, Double screedSize, Integer ram, Integer hdd, String color, Double weight, Integer battery) {
         super(producedBy, title, price, description);
         this.operationSystem = operationSystem;
         this.processor = processor;
@@ -24,6 +41,7 @@ public class TechnicalProduct extends Product {
         this.hdd = hdd;
         this.color = color;
         this.weight = weight;
+        this.battery = battery;
     }
 
     public String getProcessor() {

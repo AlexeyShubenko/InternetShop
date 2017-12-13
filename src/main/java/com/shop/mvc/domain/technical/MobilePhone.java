@@ -1,29 +1,28 @@
 package com.shop.mvc.domain.technical;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "mobilephone")
 public class MobilePhone extends TechnicalProduct {
 
-    private Integer battery;
+    @Column
     private Integer simCardAmount;
+    @Column
     private Integer camera;
 
     public MobilePhone() {
     }
 
     public MobilePhone(String producedBy, String title, Integer price, String description,
-                       String operationSystem, String processor, Double screedSize, Integer ram, Integer hdd, String color, Double weight,
+                       String operationSystem, String processor, Double screedSize, Integer ram,
+                       Integer hdd, String color, Double weight,
                        Integer battery, Integer simCardAmount, Integer camera) {
-        super(producedBy, title, price, description, operationSystem, processor, screedSize, ram, hdd, color, weight);
-        this.battery = battery;
+        super(producedBy, title, price, description, operationSystem, processor, screedSize, ram, hdd, color, weight, battery);
         this.simCardAmount = simCardAmount;
         this.camera = camera;
-    }
-
-    public Integer getBattery() {
-        return battery;
-    }
-
-    public void setBattery(Integer battery) {
-        this.battery = battery;
     }
 
     public Integer getSimCardAmount() {

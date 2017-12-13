@@ -2,10 +2,19 @@ package com.shop.mvc.domain.sport;
 
 import com.shop.mvc.domain.Product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name = "sport")
+@MappedSuperclass
 public class SportProduct extends Product {
 //2
-
+    @Column
     private String type;
+    @Column
     private Double weight;
 
     public SportProduct() {

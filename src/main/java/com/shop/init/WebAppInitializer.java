@@ -1,4 +1,4 @@
-package com.testbook.init;
+package com.shop.init;
 
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -28,7 +28,7 @@ public class WebAppInitializer implements WebApplicationInitializer{
 
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.setConfigLocation("com.testbook.config");
+        context.setConfigLocation("com.shop.config");
         return context;
     }
 

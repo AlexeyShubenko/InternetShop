@@ -1,10 +1,18 @@
 package com.shop.mvc.domain.sport;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "racket")
 public class Racket extends SportProduct {
 //3
-
+    @Column
     private String playerClass;
+    @Column
     private String gameStyle;
+    @Column
     private Double thickness;
 
     public Racket(){

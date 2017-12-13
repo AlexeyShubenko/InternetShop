@@ -1,8 +1,14 @@
 package com.shop.mvc.domain.sport;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "ball")
 public class Ball extends SportProduct {
 //1
-
+    @Column
     private String material;
 
     public Ball(){}
