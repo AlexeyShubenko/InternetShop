@@ -1,26 +1,16 @@
 package com.shop.mvc.domain;
 
-import javax.persistence.*;
+public class UserDto {
 
-@Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column
     private String name;
-    @Column
     private String login;
-    @Column
     private String password;
-    @Column
     private Boolean isAdmin;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String name, String login, String password, Boolean isAdmin) {
+    public UserDto(String name, String login, String password, Boolean isAdmin) {
         this.name = name;
         this.login = login;
         this.password = password;
