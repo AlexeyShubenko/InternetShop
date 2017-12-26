@@ -1,6 +1,8 @@
 package com.shop.mvc.controllers;
 
 import com.shop.mvc.domain.UserDto;
+import com.shop.mvc.exceptions.PasswordErrorException;
+import com.shop.mvc.exceptions.UserNotFindException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +31,48 @@ public class LoginController {
         return modelAndView;
     }
 
+    //method run after submitting data in login.jsp
+    @RequestMapping(value = "/checkLoginUser", method = RequestMethod.POST)
+    public String checkUserInputData(@Validated @ModelAttribute("userDto")UserDto userDto,
+                                           BindingResult result, RedirectAttributes attributes,
+                                           HttpSession session){
+        //check if user is on the session
+        UserDto userInSession = (UserDto) session.getAttribute("userDto");
+        if(Objects.nonNull(userInSession)){
+            //if admin go to admin page
+            if(userInSession.getAdmin()){
+                return "redirect:/administration";
+            }else {
+                return "redirect:/shop";
+            }
+        }
 
+        if(result.hasErrors()){
+            attributes.addFlashAttribute("error", "Input data is wrong!");
+            return "redirect:/login";
+        }
+
+        UserDto loggedUserDto;
+        try{
+            loggedUserDto = service.getUserServiceImpl().verifyUser(userDto.getLogin(),userDto.getPassword());
+        }catch (UserNotFindException ex){
+            attributes.addFlashAttribute("error", ex.getMessage());
+            return "redirect:/login";
+        }
+        catch (PasswordErrorException ex){
+            attributes.addFlashAttribute("error", "Password is not right!");
+            return "redirect:/login";
+        }
+
+        //if all right
+        session.setAttribute("userDto", loggedUserDto);
+        if(loggedUserDto.getAdmin()){
+            return "redirect:/administration";
+        }else {
+            return "redirect:/shop";
+        }
+
+//        return "redirect:/shop";
+    }
 
 }
