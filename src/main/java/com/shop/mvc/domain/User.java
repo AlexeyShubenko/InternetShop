@@ -3,6 +3,7 @@ package com.shop.mvc.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user1")
 public class User {
 
     @Id
@@ -25,6 +26,14 @@ public class User {
         this.login = login;
         this.password = password;
         this.isAdmin = isAdmin;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

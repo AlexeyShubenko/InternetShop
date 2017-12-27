@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -22,6 +23,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource(value = "classpath:hibernate.properties")
 @EnableTransactionManagement
+@EnableJpaRepositories(value = "com.shop.mvc.repository")
 public class DbConfig {
 
     private static final String PROP_DATABASE_DRIVER = "db.driver";

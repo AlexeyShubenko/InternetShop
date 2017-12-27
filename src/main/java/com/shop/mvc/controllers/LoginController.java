@@ -3,6 +3,8 @@ package com.shop.mvc.controllers;
 import com.shop.mvc.domain.UserDto;
 import com.shop.mvc.exceptions.PasswordErrorException;
 import com.shop.mvc.exceptions.UserNotFindException;
+import com.shop.mvc.service.MainService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +21,14 @@ import java.util.Objects;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    private MainService service;
+
+    @Autowired
+    public LoginController(MainService service) {
+        this.service = service;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET, name = "login")
     public ModelAndView login(Model model){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -47,20 +56,20 @@ public class LoginController {
             }
         }
 
-        if(result.hasErrors()){
+        /*if(result.hasErrors()){
             attributes.addFlashAttribute("error", "Input data is wrong!");
             return "redirect:/login";
-        }
-
+        }*/
+        System.out.println(userDto.toString());
         UserDto loggedUserDto;
         try{
-            loggedUserDto = service.getUserServiceImpl().verifyUser(userDto.getLogin(),userDto.getPassword());
+            loggedUserDto = service.getLoginService().verifyUser(userDto.getLogin(),userDto.getPassword());
         }catch (UserNotFindException ex){
             attributes.addFlashAttribute("error", ex.getMessage());
             return "redirect:/login";
         }
         catch (PasswordErrorException ex){
-            attributes.addFlashAttribute("error", "Password is not right!");
+            attributes.addFlashAttribute("error", ex.getMessage());
             return "redirect:/login";
         }
 
