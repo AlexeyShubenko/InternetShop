@@ -33,8 +33,8 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
 
-        if(!model.containsAttribute("userDto")){
-            model.addAttribute("userDto", new UserDto());
+        if(!model.containsAttribute("user")){
+            model.addAttribute("user", new UserDto());
         }
 
         return modelAndView;
@@ -42,11 +42,11 @@ public class LoginController {
 
     //method run after submitting data in login.jsp
     @RequestMapping(value = "/checkLoginUser", method = RequestMethod.POST)
-    public String checkUserInputData(@Validated @ModelAttribute("userDto")UserDto userDto,
+    public String checkUserInputData(@Validated @ModelAttribute("user")UserDto userDto,
                                            BindingResult result, RedirectAttributes attributes,
-                                           HttpSession session){
+                                           HttpSession session, Model model){
         //check if user is on the session
-        UserDto userInSession = (UserDto) session.getAttribute("userDto");
+        UserDto userInSession = (UserDto) session.getAttribute("user");
         if(Objects.nonNull(userInSession)){
             //if admin go to admin page
             if(userInSession.getAdmin()){
@@ -74,14 +74,16 @@ public class LoginController {
         }
 
         //if all right
-        session.setAttribute("userDto", loggedUserDto);
+        session.setAttribute("user", loggedUserDto);
         if(loggedUserDto.getAdmin()){
+            session.setAttribute("admin",loggedUserDto);
             return "redirect:/administration";
         }else {
+            session.setAttribute("user",loggedUserDto);
+            model.addAttribute("user",userDto);
             return "redirect:/shop";
         }
 
-//        return "redirect:/shop";
     }
 
 }

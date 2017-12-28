@@ -39,6 +39,14 @@ public class LoginServiceImpl implements LoginService {
             throw new PasswordErrorException("Пароль введено не правивльно");
         }
 
-        return null;
+        UserDto userDto = new UserDto.Builder()
+                .setId(user)
+                .setLogin(user)
+                .setPassword(user)
+                .setName(user)
+                .setAdmin(user)
+                .build();
+
+        return userDto;
     }
 }

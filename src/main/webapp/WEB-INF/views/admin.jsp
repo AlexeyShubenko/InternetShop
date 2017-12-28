@@ -13,24 +13,6 @@
 <body>
 
 
-<div>
-	<form:form method="POST" modelAttribute="user" action="checkLoginUser">
-
-		<div class="textErr">
-			${error}
-		</div>
-
-		<form:label path="login">Login:</form:label>
-		<form:input path="login" name="login" />
-
-		<form:label path="password">Password:</form:label>
-		<form:password path="password" name="pass"/>
-
-		<input type="submit" value="Continue" />
-		<a href="./userRegistration">Registration</a><br/>
-
-	</form:form>
-</div>
 
 </body>
 </html>

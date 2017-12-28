@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+import java.util.Objects;
+
 @Controller
 public class AdminController {
 
     @RequestMapping(value = "/administration", method = RequestMethod.GET)
-    public ModelAndView getAdminPage(Model model){
-        ModelAndView modelAndView = new ModelAndView();
-        if(!model.containsAttribute("admin")){
-            modelAndView.setViewName("login");
+    public String getAdminPage(HttpSession session){
+        UserDto admin = (UserDto) session.getAttribute("admin");
+        if(Objects.isNull(admin)){
+            return "redirect:/";
         }
+        ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin");
-        return modelAndView;
+        return "admin";
     }
 
     /////////////////////////////////////////////////////////////////////////////////
