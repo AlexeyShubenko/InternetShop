@@ -166,7 +166,7 @@
                         <div>
                             <input type="submit" class="button" value="Зберігти">
                             <%--<input type="button"  value="Повернутися до попередньої сторінки" onclick="location.href = './views/login.jsp'"/>--%>
-                            <a href="./" class="button">Повернутися до попередньої сторінки</a>
+                            <a href="/admin/main" class="button">Повернутися до попередньої сторінки</a>
                         </div>
                     </div>
                 </div>

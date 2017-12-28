@@ -50,7 +50,7 @@ public class LoginController {
         if(Objects.nonNull(userInSession)){
             //if admin go to admin page
             if(userInSession.getAdmin()){
-                return "redirect:/administration";
+                return "redirect:/admin/main";
             }else {
                 return "redirect:/shop";
             }
@@ -77,7 +77,7 @@ public class LoginController {
         session.setAttribute("user", loggedUserDto);
         if(loggedUserDto.getAdmin()){
             session.setAttribute("admin",loggedUserDto);
-            return "redirect:/administration";
+            return "redirect:/admin/main";
         }else {
             session.setAttribute("user",loggedUserDto);
             model.addAttribute("user",userDto);

@@ -13,6 +13,20 @@
 <body>
 
 
+<div>
+	<div>
+		<a href="/admin/addLaptop">Додати ноутбук</a>
+	</div>
+	<div>
+		<a href="./addMobilePhone">Додати телефон</a>
+	</div>
+	<div>
+		<a href="./addRacket">Додати тенісну ракетку</a>
+	</div>
+	<div>
+		<a href="./addBall">Додати м'яч</a>
+	</div>
+</div>
 
 </body>
 </html>
